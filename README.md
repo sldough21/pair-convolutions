@@ -1,0 +1,3 @@
+# pair-convolutions
+Code for assessing galaxy pair probabilities via redshift probability distribution function convolutions
+...
