@@ -10,7 +10,11 @@ The ultimate goal of this work is to determine whether galaxies with close proje
 
 The derivation of the relative line-of-sight velocity probability ( $\mathcal{P}_{\Delta V}$ ) is illustrated for three galaxy pairs below (see paper for more details). Briefly, galaxy redshift probability distribution functions ( $P(z)$ ) go through a change of variables to line-of-sight velocity ( $P(V)$ ), which are then convolved to get a probability distribution function of the relative line-of-sight probability ( $P(\Delta V)$ ). The integral of $P(\Delta V)$ within $\pm 1000$ km s $^{-1}$ is taken as the relative line-of-sight probability.
 
-The derivation of the projected separation probability ( $\mathcal{P}_{r_p}$ ) is illustrated below. In short, we compute the combined redshift probability distribution function by multiplying and normalizing the two $P(z)$ ’s. Then, with a measured angular separation, we perform a change of variables to obtain a projected separation probability distribution function ( $P(r_p)$ ). The integral of this function within certain bin ranges defines the projected separation probability.
+![relative line-of-sight velocity probability derivation](https://github.com/sldough21/pair-convolutions/blob/master/images/git_conv_method.png)
+
+The derivation of the projected separation probability ( $\mathcal{P}_{r}$ ) is illustrated below. In short, we compute the combined redshift probability distribution function by multiplying and normalizing the two $P(z)$ ’s. Then, with a measured angular separation, we perform a change of variables to obtain a projected separation probability distribution function ( $P(r_p)$ ). The integral of this function within certain bin ranges defines the projected separation probability.
+
+![projected separation probability derivation](https://github.com/sldough21/pair-convolutions/blob/master/images/git_Prp_method.png)
 
 ### conv_agn_merger.py
 This analysis is carried out in **conv_agn_merger.py**. This code identifies projected companions, calculates their true pair probabilities, then identifies control galaxy pairs (in parallel; again see paper for details). In order to run this code, data must be loaded into a pandas DataFrame. This data is loaded in the process_samples() function with the following columns (in no particular order):
