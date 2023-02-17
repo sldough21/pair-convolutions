@@ -45,7 +45,7 @@ max_dv = 1000 # max relative line-of-sight velocity for galaxy pairs
 select_controls = True # set to False to run the code without selecting control galaxies
 save = True # whether to save the outputs
 t_run = False # True to do a test run of the first 500 or so galaxies in a field catalog
-z_type = 'ps' # ['p', 'ps', 's'] <-- only use zphot PDFs, zphot PDFs + zspecs, or only zspecs
+z_type = 'p' # ['p', 'ps', 's'] <-- only use zphot PDFs, zphot PDFs + zspecs, or only zspecs
 date = '1.28' # add the date of your run for saving convention
 num_procs = 15 # number of processors you want to use in the control galaxy selection
 min_pp = 0.1 # minimum pair probability threshold <-- pairs with prob > 0.1 excluded from isolated galaxy pool
@@ -123,13 +123,13 @@ def process_samples(field):
     print('Beginning process_samples()...')
     # load in catalogs: <== specify column dtypes
     if field == 'COSMOS':
-        df = pd.read_csv(CATALOG_PATH+field+'_data4.csv', dtype={'ZSPEC_R':object})
+        df = pd.read_parquet(CATALOG_PATH+field+'_data4.parquet')#, dtype={'ZSPEC_R':object})
         df = df.loc[ (df['LP_TYPE'] != 1) & (df['LP_TYPE'] != -99) & (df['MASS'] > mass_lo) &
             (df['FLAG_COMBINED'] == 0) & (df['SIG_DIFF'] > 0) & (df['ZPHOT_PEAK'] > 0) & (df['CANDELS_FLAG'] == False) ]
         df = df.rename(columns={'SPLASH_CH3_FLUX':'IRAC_CH3_FLUX', 'SPLASH_CH3_FLUXERR':'IRAC_CH3_FLUXERR',
                                 'SPLASH_CH4_FLUX':'IRAC_CH4_FLUX', 'SPLASH_CH4_FLUXERR':'IRAC_CH4_FLUXERR'})
     else:
-        df = pd.read_csv(CATALOG_PATH+field+'_data4.csv', dtype={'ZSPEC_R':object})
+        df = pd.read_parquet(CATALOG_PATH+field+'_data4.parquet')#, dtype={'ZSPEC_R':object})
         df = df[ (df['CLASS_STAR'] < 0.9) & (df['PHOTFLAG'] == 0) & (df['MASS'] > mass_lo) &
             (df['SIG_DIFF'] > 0) & (df['ZPHOT_PEAK'] > 0) ] 
     df = df.reset_index(drop=True)
